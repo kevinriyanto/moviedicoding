@@ -1,13 +1,22 @@
 package com.example.moviedicoding.activity
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import com.example.moviedicoding.R
 import com.example.moviedicoding.fragment.FavoriteFragment
@@ -16,9 +25,12 @@ import com.example.moviedicoding.fragment.TvShowFragment
 import com.example.moviedicoding.fragment.favorite.FavoriteMovieFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity() {
+
+
     private val mOnNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
 
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -63,6 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+
         return super.onCreateOptionsMenu(menu)
     }
 

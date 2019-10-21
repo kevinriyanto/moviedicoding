@@ -4,21 +4,22 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedicoding.R
 import com.example.moviedicoding.activity.DetailMovieActivity
+import com.example.moviedicoding.activity.MainActivity
 import com.example.moviedicoding.adapter.ListMovieAdapter
 import com.example.moviedicoding.viewmodel.MovieViewModel
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 
 class MovieFragment : Fragment() {
@@ -28,7 +29,7 @@ class MovieFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movieViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MovieViewModel::class.java)
-
+        setHasOptionsMenu(true)
     }
     fun showLoading(state:Boolean){
         if (state){
@@ -68,6 +69,51 @@ class MovieFragment : Fragment() {
         })
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.main_menu,menu)
+        val searchView = SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
+        menu.findItem(R.id.search).apply {
+            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            actionView = searchView
+        }
+        val searchItem:MenuItem = menu.findItem(R.id.search)
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String): Boolean {
+                movieViewModel.setSearchMovies(query)
+                showLoading(true)
+                movieViewModel.getMovies().observe(this@MovieFragment, Observer { movieItems ->
+                    if (movieItems!= null) {
+                        adapter.setData(movieItems)
+                        showLoading(false)
+                    }
+                })
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+        })
+        searchView.setOnClickListener { view -> }
+        searchView.setOnQueryTextFocusChangeListener(object: View.OnFocusChangeListener{
+            override fun onFocusChange(p0: View?, p1: Boolean) {
+                if(!p1){
+                    searchItem.collapseActionView()
+                    movieViewModel.setMovies()
+                    showLoading(true)
+                    movieViewModel.getMovies().observe(this@MovieFragment, Observer { movieItems ->
+                        if (movieItems!= null) {
+                            adapter.setData(movieItems)
+                            showLoading(false)
+                        }
+                    })
+                }
+            }
+        })
     }
 
 }

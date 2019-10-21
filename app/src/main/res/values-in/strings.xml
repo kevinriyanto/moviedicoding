@@ -124,5 +124,14 @@
     <string name="nav_title_tv_show">Tv Series</string>
     <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
     <string name="favorites">Disukai</string>
-
+    <string name="search_movie">search_movie</string>
+    <string name="search_hint">Masukkan kata</string>
+    <string name="hello_blank_fragment">Hallo fragment kosong</string>
+    <string name="empte_text">empte_text</string>
+    <string name="add_widget">Tambah Widget</string>
+    <string name="app_name_widget">FilmStackWidget</string>
+    <string name="appwidget_text">Film yang disukai</string>
+    <string name="empty_text">TIDAK ADA DATA</string>
+    <string name="subtext">Hai, ayo kembali untuk melihat apa yang baru di aplikasi</string>
+    <string name="Reminder">Pengingat</string>
 </resources>

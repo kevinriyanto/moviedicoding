@@ -25,7 +25,7 @@ internal class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
 
         private const val DATABASE_VERSION = 1
 
-        private val SQL_CREATE_TABLE_FAVORITE_MOVIE = "CREATE TABLE $TABLE_NAME" +
+        private const val SQL_CREATE_TABLE_FAVORITE_MOVIE = "CREATE TABLE $TABLE_NAME" +
                 "(${FavoriteMovie.MovieColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "${FavoriteMovie.MovieColumns.MOVIE_ID} TEXT NOT NULL," +
                 "${FavoriteMovie.MovieColumns.MOVIE_NAME} TEXT NOT NULL," +

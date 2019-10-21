@@ -32,6 +32,7 @@ class FavoriteTvFragment : Fragment() {
     private lateinit var adapter: ListTvShowAdapter
     private lateinit var pg:ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
+
     private fun loadMovieAsync() {
         GlobalScope.launch(Dispatchers.Main) {
             pg.visibility = View.VISIBLE
