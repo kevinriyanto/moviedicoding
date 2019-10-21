@@ -123,5 +123,6 @@
     <string name="nav_title_movie">Film</string>
     <string name="nav_title_tv_show">Tv Series</string>
     <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="favorites">Disukai</string>
 
 </resources>

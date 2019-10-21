@@ -35,6 +35,7 @@ class TvShowViewModel : ViewModel() {
                         val tv_shows = list.getJSONObject(i)
                         val tvShowsItem = TvShow()
                         val POSTER_FILENAME = tv_shows.getString("poster_path")
+                        tvShowsItem.id = tv_shows.getInt("id")
                         tvShowsItem.image = "https://image.tmdb.org/t/p/w185$POSTER_FILENAME"
                         tvShowsItem.title = tv_shows.getString("original_name")
                         tvShowsItem.detail = tv_shows.getString("overview")

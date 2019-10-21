@@ -34,6 +34,7 @@ class MovieViewModel : ViewModel() {
                         val movie = list.getJSONObject(i)
                         val moviesItem = Movie()
                         val POSTER_FILENAME = movie.getString("poster_path")
+                        moviesItem.id = movie.getInt("id")
                         moviesItem.image = "https://image.tmdb.org/t/p/w185$POSTER_FILENAME"
                         moviesItem.title = movie.getString("title")
                         moviesItem.detail = movie.getString("overview")

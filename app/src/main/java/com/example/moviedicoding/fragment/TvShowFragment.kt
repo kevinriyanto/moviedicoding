@@ -1,5 +1,8 @@
 package com.example.moviedicoding.fragment
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,13 +45,22 @@ class TvShowFragment : Fragment() {
         pgBar = view.progressBarTV
 
         adapter =  ListTvShowAdapter(){
-            startActivity<DetailMovieActivity>("title" to it?.title,"image" to it?.image,"detail" to it?.detail)
+            startActivity<DetailMovieActivity>("title" to it?.title,"image" to it?.image,"detail" to it?.detail, "id" to it?.id, "tv" to true)
         }
         adapter.notifyDataSetChanged()
         view.tv_show_list.layoutManager = LinearLayoutManager(context)
         view.tv_show_list.adapter = adapter
-        tvShowViewModel.setTvShows()
+
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
         showLoading(true)
+
+        if(isConnected){
+            tvShowViewModel.setTvShows()
+        }else{
+            showLoading(false)
+        }
 
         tvShowViewModel.getTvShows().observe(this, Observer { movieItems ->
             if (movieItems!= null) {

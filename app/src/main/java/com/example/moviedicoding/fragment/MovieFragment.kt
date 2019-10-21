@@ -1,5 +1,8 @@
 package com.example.moviedicoding.fragment
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,14 +44,21 @@ class MovieFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_movie, container, false)
         pgBar = view.progressBar
         adapter =  ListMovieAdapter(){
-            startActivity<DetailMovieActivity>("title" to it?.title,"image" to it?.image,"detail" to it?.detail)
+            startActivity<DetailMovieActivity>("title" to it?.title,"image" to it?.image,"detail" to it?.detail, "id" to it?.id,"movie" to true)
         }
         adapter.notifyDataSetChanged()
         view.movie_list.layoutManager = LinearLayoutManager(context)
         view.movie_list.adapter = adapter
-
-        movieViewModel.setMovies()
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
         showLoading(true)
+
+        if(isConnected){
+            movieViewModel.setMovies()
+        }else{
+            showLoading(false)
+        }
 
         movieViewModel.getMovies().observe(this, Observer { movieItems ->
             if (movieItems!= null) {
