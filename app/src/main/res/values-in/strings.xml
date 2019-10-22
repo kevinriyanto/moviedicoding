@@ -134,4 +134,6 @@
     <string name="empty_text">TIDAK ADA DATA</string>
     <string name="subtext">Hai, ayo kembali untuk melihat apa yang baru di aplikasi</string>
     <string name="Reminder">Pengingat</string>
+    <string name="turn_on_notification">Hidupkan Pemberitahuan</string>
+    <string name="turn_off_notification">Matikan Pemberitahuan</string>
 </resources>

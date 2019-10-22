@@ -2,10 +2,8 @@ package com.example.moviedicoding.fragment
 
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.example.moviedicoding.R
 import com.example.moviedicoding.adapter.MyPagerAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
@@ -29,5 +27,12 @@ class FavoriteFragment : Fragment() {
         return view
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.main_menu,menu)
+        val myMenu = menu.findItem(R.id.search)
+        myMenu.setVisible(false)
+    }
 
 }

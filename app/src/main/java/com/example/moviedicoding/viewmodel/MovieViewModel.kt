@@ -90,14 +90,14 @@ class MovieViewModel : ViewModel() {
             }
         })
     }
-    internal fun setDailyNewMovies(query: String) {
+    internal fun setDailyNewMovies() {
         val client = AsyncHttpClient()
         val listItems = ArrayList<Movie>()
         val pattern = "yyyy-MM-dd"
         val simpleDateFormat = SimpleDateFormat(pattern);
         val date = simpleDateFormat.format(Date());
         val url = "https://api.themoviedb.org/3/discover/movie?api_key=$API_KEY&primary_release_date.gte=$date&primary_release_date.lte=$date"
-//        println(url)
+        println(url)
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
                 statusCode: Int,

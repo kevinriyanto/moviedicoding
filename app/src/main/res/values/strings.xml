@@ -136,4 +136,6 @@
     <string name="empty_text">NO DATA</string>
     <string name="subtext">Hi, lets come to see what new in our application</string>
     <string name="Reminder">Reminder</string>
+    <string name="turn_on_notification">Turn On Notification</string>
+    <string name="turn_off_notification">Turn Off Notification</string>
 </resources>
