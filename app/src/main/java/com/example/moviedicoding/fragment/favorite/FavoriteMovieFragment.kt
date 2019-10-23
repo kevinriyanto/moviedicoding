@@ -2,21 +2,18 @@ package com.example.moviedicoding.fragment.favorite
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
 import com.example.moviedicoding.R
 import com.example.moviedicoding.activity.DetailMovieActivity
 import com.example.moviedicoding.adapter.ListMovieAdapter
 import com.example.moviedicoding.database.helper.FavoriteMovieHelper
 import com.example.moviedicoding.database.helper.MappingHelper
-import kotlinx.android.synthetic.main.fragment_favorite_movie.*
 import kotlinx.android.synthetic.main.fragment_favorite_movie.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,7 +21,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * A simple [Fragment] subclass.
@@ -77,10 +73,7 @@ class FavoriteMovieFragment : Fragment() {
         }
         return view
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        myHelper.close()
-    }
+
 
 
 }

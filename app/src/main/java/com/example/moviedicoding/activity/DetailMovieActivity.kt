@@ -147,8 +147,5 @@ class DetailMovieActivity : AppCompatActivity() {
         showLoading(false)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        movieHelper.close()
-    }
+
 }

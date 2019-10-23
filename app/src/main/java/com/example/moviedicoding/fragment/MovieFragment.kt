@@ -16,10 +16,8 @@ import com.example.moviedicoding.activity.DetailMovieActivity
 import com.example.moviedicoding.activity.MainActivity
 import com.example.moviedicoding.adapter.ListMovieAdapter
 import com.example.moviedicoding.viewmodel.MovieViewModel
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_movie.view.*
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 
 class MovieFragment : Fragment() {
