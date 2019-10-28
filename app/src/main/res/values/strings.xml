@@ -138,4 +138,5 @@
     <string name="Reminder">Reminder</string>
     <string name="turn_on_notification">Turn On Notification</string>
     <string name="turn_off_notification">Turn Off Notification</string>
+    <string name="notif_setting">Notification Setting</string>
 </resources>

@@ -7,24 +7,20 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.example.moviedicoding.notification.DailyAlarmReceiver
 import com.example.moviedicoding.R
 import com.example.moviedicoding.fragment.FavoriteFragment
 import com.example.moviedicoding.fragment.MovieFragment
 import com.example.moviedicoding.fragment.TvShowFragment
-import com.example.moviedicoding.model.Movie
 import com.example.moviedicoding.model.NotificationItem
+import com.example.moviedicoding.notification.DailyAlarmReceiver
 import com.example.moviedicoding.notification.NewRealeaseReceiver
-import com.example.moviedicoding.utils.UtilsConstant.Companion.TYPE_REPEATING
-import com.example.moviedicoding.viewmodel.MovieViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var dailyReceiver: DailyAlarmReceiver
-    private lateinit var movieReceiver: NewRealeaseReceiver
+
     companion object{
         private val stackNotif = ArrayList<NotificationItem>()
         private val NOTIFICATION_REQUEST_CODE = 200
@@ -61,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             return false
         }
     }
-    private lateinit var movieViewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,16 +67,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             navigation.selectedItemId = R.id.navigation_movie
         }
-        dailyReceiver = DailyAlarmReceiver()
-        movieReceiver = NewRealeaseReceiver()
-        movieViewModel = MovieViewModel()
 
-        movieViewModel.setDailyNewMovies()
-        movieViewModel.getMovies().observe(this, Observer { movieItems ->
-            if (movieItems!= null) {
-                movieReceiver.setData(movieItems)
-            }
-        })
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -92,12 +79,8 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_change_settings) {
             val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(mIntent)
-        }else if(item.itemId == R.id.turn_on_notif){
-            movieReceiver.setRepeatingAlarm(this)
-            dailyReceiver.setRepeatingAlarm(this)
-        }else if(item.itemId == R.id.turn_off_notif){
-            movieReceiver.cancelAlarm(this)
-            dailyReceiver.cancelAlarm(this)
+        }else if(item.itemId == R.id.turn_on_notif) {
+            startActivity<SettingActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

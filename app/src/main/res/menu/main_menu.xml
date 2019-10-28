@@ -13,10 +13,6 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/turn_on_notif"
-        android:title="@string/turn_on_notification"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/turn_off_notif"
-        android:title="@string/turn_off_notification"
+        android:title="@string/notif_setting"
         app:showAsAction="never"/>
 </menu>
